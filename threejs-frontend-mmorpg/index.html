@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script type="importmap">
+        {
+          "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.167.1/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.167.1/examples/jsm/"
+          }
+        }
+      </script>
+  <script src="https://cdn.jsdelivr.net/npm/yuka@0.7.8/build/yuka.min.js"></script>
+  <link rel="stylesheet" href="./css/index.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/7/Stats.js"
+    integrity="sha512-+nNqDCQd6FiN/mQKnpfI/UswnfuG/cjHZbv+amV/2PLiuGgN8+D5dKzR4PqnSY5pZBExGavZz+FdjIeI9WgpKQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdn.socket.io/4.6.0/socket.io.min.js"></script>
+</head>
+
+<body>
+
+  <div class="damage" id="js-damage"></div>
+
+  <div class="characters" id="characters">
+  </div>
+
+  <div id="monster-info">
+  </div>
+
+  <div id="items">
+    <img src="/assets/items/myfriend.png" alt="" id="js-friend-button">
+    <img src="/assets/items/friend.png" alt="" id="js-other-button">
+    <img src="/assets/items/atm-card.png" alt="" id="js-pay-button">
+    <img src="/assets/items/shop.png" alt="" id="js-shop-button">
+    <img src="/assets/items/bag.png" alt="" id="js-bag-button">
+    <img src="/assets/items/info.png" alt="" id="js-user-button">
+  </div>
+
+  <div class="normal-skill">
+    <div class="avatar"><img src="/assets/warrior/punch.png" alt=""></div>
+    <div class="title">
+      <p>space</p>
+    </div>
+  </div>
+
+  <div class="expecial-skill">
+    <div class="avatar"><img src="/assets/warrior/teleport.png" alt=""></div>
+    <div class="title">
+      <p>X</p>
+    </div>
+  </div>
+
+  <div class="bag" id="js-bag">
+    <div class="bag-left" id="js-bag-left">
+    </div>
+    <div class="bag-right" id="js-bag-right">
+      <div class="name-item">
+        <h3 id="js-equipment-groupname"></h3>
+      </div>
+      <div class="top-info">
+        <div class="top-info-left">
+          <div class="top-info-left-top">
+            <p id="js-equipment-name"></p>
+          </div>
+          <div class="top-info-left-bottom">
+            <p class="string" id="js-equipment-main-property"></p>
+            <p class="num" id="js-equipment-main-value"></p>
+          </div>
+        </div>
+        <div class="top-info-right" id="js-detail-item-img">
+          <img src="/assets/equipments/flower.png" alt="">
+        </div>
+      </div>
+      <div class="bottom-info" id="js-bottom-info">
+        <p>Không có trang bị để hiển thị</p>
+        
+      </div>
+    </div>
+    <img class="bag-close-button" src="/assets/equipments/close-button.png" alt="" id="js-bag-close-btn">
+  </div>
+
+  <div class="shop" id="js-shop">
+    <div class="shop-properties">
+      <div class="shop-properties-mora">
+        <img class="shop-properties-mora-img" src="/assets/items/mora.png" alt="">
+        <p class="shop-properties-mora-info" id="js-mora">3000</p>
+      </div>
+    </div>
+    <div class="shop-items">
+      <div class="shop-items-left" id="js-shop-panel-left">
+        <!-- <div class="shop-items-left-item">
+          <img src="/assets/equipments/Weapon_A_Thousand_Floating_Dreams.webp" alt="">
+        </div> -->
+      </div>
+      <div class="shop-items-right" id="js-shop-panel-right">
+        <!-- <div class="shop-items-right-name">Tên trang bị</div>
+        <div class="shop-items-right-info">
+          <img src="/assets/equipments/Weapon_A_Thousand_Floating_Dreams.webp" alt="">
+          <div class="shop-items-right-info-detail">
+            <p>atk: 3000</p>
+            <p>hp: 700</p>
+          </div>
+        </div>
+        <div class="shop-items-right-buy">
+          <button>Mua</button>
+        </div> -->
+      </div>
+    </div>
+    <img class="bag-close-button" src="/assets/equipments/close-button.png" alt="" id="js-shop-close-btn">
+  </div>
+
+  <div class="notification" id="js-equipment-notification">
+    <!-- <div id="notification-item" class="notification-item show">
+        Đã nhận được trang bị: <span class="notification-item-equipname">Bí Điển Obsidian</span>
+      </div> -->
+  </div>
+
+  <div class="story hide" id="js-story">
+    <span class="story-owner" id="js-story-owner">nana</span>
+    <p class="story-content" id="js-story-content">Xin chào bạn, tôi là nana</p>
+    <button id="js-story-btn"><img src="assets/story/story_btn.png" alt=""></button>
+  </div>
+
+  <!-- <div class="communicated-notification">
+      <p>Joan</p> <div>F</div>
+    </div> -->
+
+  <div class="user-info hidden" id="js-user-info-window">
+    <p class="user-info-title">Thông tin người dùng</p>
+    <label for="">username:</label>
+    <input type="text" id="js-user-info-username">
+    <label for="">password:</label>
+    <input type="password" id="js-user-info-password">
+    <label for="">email</label>
+    <input type="text" id="js-user-info-email">
+    <label for="">Nhấn nút esc để đóng bảng chọn</label>
+    <button>Thay đổi thông tin</button>
+  </div>
+
+  <div class="payment" id="js-payment-window">
+    <h2> Gói nạp </h2>
+    <div class="payment-item">
+      <div class="payment-item-info">
+        <img src="/assets/items/mora.png" alt="">
+        <p>3000</p>
+      </div>
+      <p class="payment-item-price">10.000 đ</p>
+    </div>
+    <div class="payment-info">
+      <img src="/assets/payment/agribank.jpg" alt="" class="payment-info-agribank">
+      <img src="/assets/payment/momo.jpg" alt="" class="payment-info-momo">
+    </div>
+
+    <p class="payment-note">Nội dung chuyển tiền vui lòng chứa đầy đủ một số thông tin sau</p>
+    <p class="payment-note">Cú pháp nên dùng: họ tên - email - số tiền - mã gói</p>
+
+    <form action="" class="payment-form">
+      <h3>Gửi thông tin đã thanh toán</h3>  
+      <label for="">Nhập đầy đủ họ và tên</label>
+      <input type="text" name="" id="js-username">
+      <label for="">Nhập đầy đủ email</label>
+      <input type="text" name="" id="js-email">
+      <label for="">Ngân hàng chuyển khoản</label>
+      <div class="payment-form-bank">
+        <label for="" class="payment-form-bank-item" style="color: rgb(211, 65, 87);">
+          <input type="radio" name="bank"  value="agribank">
+          Agribank
+        </label>
+        <label for="" class="payment-form-bank-item" style="color: rgb(229, 23, 160);">
+          <input type="radio" name="bank"  value="momo">
+          Momo
+        </label>
+      </div>
+
+      <label for="">Gói nạp</label>
+      <div class="payment-form-package">
+        <label for="">
+          <input type="radio" name="package" value="pkg1">
+          10.000đ (mã pkg1)
+        </label>
+      </div>
+      <button class="payment-form-submit" id="js-submit">Gửi thông tin</button>
+    </form>
+
+    <img class="bag-close-button" src="/assets/equipments/close-button.png" alt="" id="js-payment-close-btn">
+  </div>
+
+  <div class="other" id="js-other-window">
+    <img class="bag-close-button" src="/assets/equipments/close-button.png" alt="" id="js-other-close-btn">
+    <p class="other-title">Những người chơi trực tuyến khác</p>
+    <div class="other-panel" id="js-other-panel">
+      <div class="other-panel-item">
+        <div class="other-panel-item-name">Tên người chơi</div>
+        <button>Kết bạn</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="friend" id="js-friend-window">
+    <img class="bag-close-button" src="/assets/equipments/close-button.png" alt="" id="js-friend-close-btn">
+    <p class="friend-title">Danh sách bạn bè</p>
+    <div class="friend-info">
+      <div class="friend-info-listfriend" id="js-listfriend">
+        <!-- <div class="friend-info-listfriend-item" >
+          <p class="friend-info-listfriend-item-username">Tên người chơi hshs hshshs sjsjss fhfhf</p>
+        </div>
+        <div class="friend-info-listfriend-item active">
+          <p class="friend-info-listfriend-item-username">Tên người chơi dhdhdhdhdhdhd</p>
+        </div>
+        <div class="friend-info-listfriend-item">
+          <p class="friend-info-listfriend-item-username">Tên người chơi</p>
+        </div> -->
+      </div>
+      <div class="friend-info-chatpanel">
+        <div class="friend-info-chatpanel-messages" id="js-messages">
+          <!-- <p class="friend-info-chatpanel-messages-owner">Hello HelloHelloHelloHelloHello HelloHelloHelloHelloHelloHello HelloHelloHelloHelloHello kkkk</p>
+          <p class="friend-info-chatpanel-messages-other">Hello khoaaaaa</p>
+          <p class="friend-info-chatpanel-messages-other">Hello khjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjoa</p>
+          <p class="friend-info-chatpanel-messages-owner">Hello kkkk jfjfjfj</p>
+          <p class="friend-info-chatpanel-messages-owner">Hello kkkk jfjfjfj</p>
+          <p class="friend-info-chatpanel-messages-owner">Hello kkkk jfjfjfj</p> -->
+
+        </div>
+        <div class="friend-info-chatpanel-user">
+          <input type="text" disabled id="js-input-message">
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script type="module" src="/main.js"></script>
+  <script type="module" src="/event/friend.js"></script>
+  <script type="module" src="/event/other.js"></script>
+  <script type="module" src="/event/payment.js"></script>
+  <script type="module" src="/event/shop.js"></script>
+  <script type="module" src="event/bag.js"></script>
+  <script type="module" src="/event/user.js"></script>
+  <script type="module" src="/modules/socket.js"></script>
+
+</body>
+
+</html>

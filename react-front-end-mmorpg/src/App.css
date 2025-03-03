@@ -1,0 +1,235 @@
+/* Wrapper chiếm hết chiều cao màn hình */
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  background-color: #f9f9f9;
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+}
+
+/* Phần nội dung chính */
+.app-container {
+  flex-grow: 1;
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fdfdfd;
+  padding: 20px 30px;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.dashboard-title {
+  font-size: 24px;
+  margin: 0;
+  color: #1571fc;
+}
+
+.search-container {
+  flex-grow: 1;
+  text-align: center;
+}
+
+.search-input {
+  width: 60%;
+  padding: 8px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: none;
+  margin-left: 10px;
+}
+
+.logout-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.logout-button {
+  padding: 10px 20px;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.logout {
+  text-decoration: none;
+  color: white;
+}
+
+.logout-button:hover {
+  background-color: #d32f2f;
+}
+
+.table-title {
+  align-content: center;
+}
+
+.user-list {
+  margin: 20px auto;
+  width: 80%;
+}
+
+.user-list table {
+  border-collapse: collapse;
+  width: 100%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.user-list th, .user-list td {
+  padding: 12px 15px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.user-list th {
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+.user-list tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.user-list button {
+  padding: 8px 12px;
+  margin: 5px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.user-list .save-button {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.user-list .edit-button {
+  background-color: #FFD700;
+  color: white;
+}
+
+.user-list .delete-button {
+  background-color: #f44336;
+  color: white;
+}
+
+.user-list button:hover {
+  opacity: 0.8;
+}
+
+.user-list td:last-child {
+  width: 150px;
+}
+
+.edit-input, .search-input, .edit-input select {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+.edit-input {
+  margin: 5px 0;
+}
+
+.action-button {
+  padding: 8px 12px;
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+}
+
+.action-button:hover {
+  background-color: #45a049;
+}
+
+/* Footer */
+.footer {
+  width: 100%;
+  position: absolute;
+  box-sizing: border-box;
+  padding: 15px;
+  margin: 0;
+  background-color: #06254f;
+  color: white;
+  text-align: center;
+  /* padding: 15px; */
+  left: 0;
+  bottom: 0;
+}
+
+/* Style cho Report Log Button */
+.header-actions {
+  display: flex;
+  align-items: center;
+}
+
+.report-log-button {
+  padding: 10px 15px;
+  background-color: #4b7de1;
+  color: white;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.report-log-button:hover {
+  background-color: #45a049;
+}
+
+.logout-button {
+  padding: 10px 15px;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.logout-button:hover {
+  background-color: #d32f2f;
+}
+
+/* Report Log Table Styles */
+.report-log-container {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.report-log-container h3 {
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.report-log-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.report-log-table th, .report-log-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.report-log-table th {
+  background-color: #f4f4f4;
+}
+
+.report-log-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
